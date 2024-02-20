@@ -9,7 +9,7 @@ const props = withDefaults(
     to?: RouteLocationRaw;
     appearance?: 'regular' | 'outline' | 'none';
     size?: 'sm' | 'md' | 'lg' | 'auto';
-    color?: 'primary' | 'secondary' | 'green' | 'yellow' | 'lightprimary' | 'danger';
+    color?: 'primary' | 'secondary' | 'green' | 'yellow' | 'danger';
     textColor?: 'white' | 'black' | 'primary' | 'gray' | '';
     type?: 'submit' | 'button';
     loading?: boolean;
@@ -48,7 +48,6 @@ const colorClasses: Record<typeof props.color, string> = {
   green: 'bg-green-500 hover:bg-green-400 text-green-50',
   yellow: 'bg-yellow-500 hover:bg-yellow-400 text-yellow-950',
   danger: 'bg-red-500 hover:bg-red-400 text-red-950',
-  lightprimary: 'bg-primary-300 text-primary-50',
 };
 
 const textColorClasses: Record<typeof props.textColor, string> = {

@@ -1,13 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const { iconsPlugin, getIconCollections } = require('@egoist/tailwindcss-icons');
 module.exports = {
-  content: [
-    './src/**/*.{vue,js,css}',
-    './components/**/*.{vue,js}',
-    './components/content/*.vue',
-    './components/content/base/*.vue',
-    './nuxt.config.{js,ts}',
-  ],
   theme: {
     extend: {
       colors: {
