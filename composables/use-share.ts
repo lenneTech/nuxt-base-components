@@ -1,5 +1,5 @@
 import { useModal } from '~/composables/use-modal';
-import ModalShare from '~/components/ModalShare.vue';
+import ModalShare from '~/components/modal/ModalShare.vue';
 
 export function useShare() {
   const route = useRoute();
