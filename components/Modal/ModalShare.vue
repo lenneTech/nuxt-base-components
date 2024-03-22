@@ -56,7 +56,7 @@ const shareWith = (type: 'mail' | 'whatsapp' | 'facebook' | 'linkedin' | 'twitte
         <span class="text-ellipsis overflow-hidden">
           {{ url }}
         </span>
-        <BaseButton size="sm" @click="copyUrl()"> Kopieren </BaseButton>
+        <Button size="sm" @click="copyUrl()"> Kopieren </Button>
       </div>
     </div>
   </Modal>

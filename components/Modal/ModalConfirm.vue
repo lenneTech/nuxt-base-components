@@ -27,12 +27,12 @@ const { close } = useModal();
       {{ context?.data?.text }}
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-      <BaseButton appearance="outline" color="primary" @click="context?.confirm?.(false)">
+      <Button appearance="outline" color="primary" @click="context?.confirm?.(false)">
         {{ context?.data?.cancelText || 'Abbrechen' }}
-      </BaseButton>
-      <BaseButton :color="context?.data?.confirmColor || 'primary'" @click="context?.confirm?.(true)">
+      </Button>
+      <Button :color="context?.data?.confirmColor || 'primary'" @click="context?.confirm?.(true)">
         {{ context?.data?.confirmText || 'Ok' }}
-      </BaseButton>
+      </Button>
     </div>
   </Modal>
 </template>
