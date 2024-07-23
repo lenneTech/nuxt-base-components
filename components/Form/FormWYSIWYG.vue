@@ -8,43 +8,44 @@ defineOptions({
 });
 
 const props = withDefaults(
-  defineProps<{
-    label?: string;
-    name: string;
-    placeholder?: string;
-    readOnly?: boolean;
-    toolbar?: string;
-  }>(),
-  {
-    readOnly: false,
-    toolbar: 'essential',
-  },
+    defineProps<{
+      height?: string;
+      label?: string;
+      modelValue?: string;
+      name: string;
+      placeholder?: string;
+      readOnly?: boolean;
+      standalone?: boolean;
+      toolbar?: string;
+    }>(),
+    {
+      height: '500px',
+      readOnly: false,
+      standalone: false,
+      toolbar: 'essential',
+    },
 );
 
-const { errors, handleBlur, meta, setTouched, setValue, value } = useField(() => props.name);
+const { errors, handleBlur, meta, setTouched, setValue, value } = useField(() => props.name, undefined, {
+  controlled: !props.standalone,
+  initialValue: props.standalone ? props.modelValue : undefined,
+  syncVModel: props.standalone,
+});
 const editor = ref<any>(null);
 
 watch(
-  () => value.value,
-  () => {
-    const content = editor.value.getContents();
+    () => value.value,
+    () => {
+      const content = editor.value?.getContents();
 
-    if (content !== value.value) {
-      editor.value.setContents(value.value);
-      setTouched(false);
-    }
-  },
+      if (content !== value.value) {
+        editor.value?.setContents(value.value);
+        setTouched(false);
+      }
+    },
 );
 
-function htmlToText(html: string) {
-  return html.replace(/<[^>]*>?/gm, '');
-}
-
 function handleInput(content: any) {
-  if (htmlToText(content) === htmlToText(value.value as string)) {
-    return;
-  }
-
   setValue(content, meta.validated);
 }
 
@@ -55,11 +56,11 @@ const attributes = useAttrs() as { class: string };
   <div class="mt-4">
     <div class="flex justify-between">
       <label
-        v-if="label"
-        :for="name"
-        class="block text-base font-medium leading-6 text-foreground"
-        :class="attributes.class"
-        >{{ label }}{{ meta.required ? '*' : '' }}</label
+          v-if="label"
+          :for="name"
+          class="block text-base font-medium leading-6 text-foreground"
+          :class="attributes.class"
+      >{{ label }}{{ meta.required ? '*' : '' }}</label
       >
       <slot name="suffix"></slot>
     </div>
@@ -67,16 +68,16 @@ const attributes = useAttrs() as { class: string };
       <ClientOnly>
         <div :class="{ 'ring-1 !ring-error !text-error': meta.validated && errors?.length }">
           <QuillEditor
-            ref="editor"
-            :content="value"
-            :toolbar="toolbar"
-            content-type="html"
-            :placeholder="placeholder"
-            :read-only="readOnly"
-            theme="snow"
-            @blur="handleBlur"
-            @focus="setTouched(true)"
-            @update:content="handleInput"
+              ref="editor"
+              :content="value"
+              :toolbar="toolbar"
+              content-type="html"
+              :placeholder="placeholder"
+              :read-only="readOnly"
+              theme="snow"
+              @blur="handleBlur"
+              @focus="setTouched(true)"
+              @update:content="handleInput"
           />
         </div>
       </ClientOnly>
@@ -84,3 +85,14 @@ const attributes = useAttrs() as { class: string };
     </div>
   </div>
 </template>
+
+<style>
+.ql-toolbar.ql-snow {
+  border-radius: 8px 8px 0 0;
+}
+
+.ql-container.ql-snow {
+  border-radius: 0 0 8px 8px;
+  height: v-bind('height');
+}
+</style>

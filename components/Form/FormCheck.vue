@@ -17,12 +17,10 @@ const props = withDefaults(
     standalone?: boolean;
     suffixIcon?: string;
     tabindex?: string;
-    type?: string;
   }>(),
   {
     readOnly: false,
     standalone: false,
-    type: 'text',
   },
 );
 

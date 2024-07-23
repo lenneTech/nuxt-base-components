@@ -12,11 +12,11 @@ const props = withDefaults(
       label?: string;
       name: string;
       placeholder?: string;
-      readonly?: boolean;
+      readOnly?: boolean;
       tabindex?: string;
     }>(),
     {
-      readonly: false,
+      readOnly: false,
     },
 );
 
@@ -63,7 +63,7 @@ const attributes = useAttrs() as { class: string };
           :autocomplete="autocomplete"
           type="date"
           :name="name"
-          :readonly="readonly"
+          :readonly="readOnly"
           :tabindex="tabindex"
           :disabled="disabled"
           class="bg-background block w-full rounded-md border-0 py-1.5 text-foreground shadow-sm ring-1 ring-inset ring-border placeholder:text-foreground/50 focus:ring-1 focus:ring-inset focus:ring-primary-500 sm:text-sm sm:leading-6 read-only:bg-white-100 read-only:ring-white-100 read-only:focus:ring-white-100"

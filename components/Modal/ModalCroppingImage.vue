@@ -3,7 +3,9 @@ import { Cropper } from 'vue-advanced-cropper';
 
 import type { ModalContext } from '~/composables/use-modal';
 
-const props = defineProps<{ context: ModalContext<{ confirm: (file: File | null) => void; img: File }> }>();
+const props = defineProps<{
+  context: ModalContext<{ aspectRatio: number; confirm: (file: File | null) => void; img: File }>;
+}>();
 const { close } = useModal();
 const base64File = ref<string>('');
 const cropperRef = ref();
@@ -68,16 +70,16 @@ function submit() {
         class="w-full !max-h-[45vh]"
         :src="base64File"
         :stencil-props="{
-          aspectRatio: 4 / 3,
+          aspectRatio: context.data?.aspectRatio ?? 4 / 3,
         }"
       />
     </div>
-    <div class="flex justify-center gap-10">
+    <div class="flex items-center justify-center gap-5">
       <Button appearance="outline" @click="context.data?.confirm(null)">
-        {{ 'Abbrechen' }}
+        Abbrechen
       </Button>
       <Button color="primary" @click="submit()">
-        {{ 'Weiter' }}
+        Weiter
       </Button>
     </div>
   </Modal>
