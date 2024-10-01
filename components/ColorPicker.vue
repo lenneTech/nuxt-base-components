@@ -8,13 +8,12 @@ const props = defineProps<{
   primaryLabel: string;
 }>();
 
-const {generateColorPalette, setBlack} = useTheme();
+const { generateColorPalette, setBlack } = useTheme();
 const input = ref<HTMLElement>();
 const iconColor = ref();
 const palette = ref<Color>({});
 
-
-const {setValue, value} = useField(() => props.name, undefined, {});
+const { setValue, value } = useField(() => props.name, undefined, {});
 
 if (!value.value) {
   value.value = '#000000'
@@ -28,7 +27,7 @@ watch(
         iconColor.value = setBlack(newValue) ? 'black' : 'white';
       }
     },
-    {immediate: true},
+    { immediate: true },
 );
 
 function onChangePalette(event: any) {
@@ -73,12 +72,11 @@ function onChangePalette(event: any) {
     </div>
   </div>
 </template>
-<style>
 
+<style>
 input[type='color']::-webkit-color-swatch {
   outline: 0;
   box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0);
   border-radius: 0.75rem;
 }
-
 </style>

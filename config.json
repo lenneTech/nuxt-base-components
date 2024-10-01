@@ -1,0 +1,75 @@
+{
+  "config": {
+    "Accordion": {
+      "npm": [
+        "@vueuse/core"
+      ]
+    },
+    "Button": {
+      "npm": [
+        "tailwind-merge"
+      ]
+    },
+    "MenuContainer": {
+      "npm": [
+        "tailwind-merge"
+      ],
+      "composables": [
+        "use-context-menu"
+      ]
+    },
+    "Form": {
+      "npm": [
+        "vee-validate"
+      ]
+    },
+    "Modal": {
+      "npm": [
+        "tailwind-merge"
+      ],
+      "composables": [
+        "use-modal"
+      ]
+    },
+    "Spinner": {
+      "npm": [
+        "tailwind-merge"
+      ]
+    },
+    "Notification": {
+      "composables": [
+        "use-notification"
+      ]
+    },
+    "ColorPicker": {
+      "composables": [
+        "use-theme"
+      ],
+      "npm": [
+        "vee-validate"
+      ]
+    },
+    "UploadImage": {
+      "components": [
+        "CroppingModal"
+      ],
+      "npm": [
+        "vee-validate"
+      ]
+    },
+    "WYSIWYG": {
+      "npm": [
+        "vee-validate",
+        "@vueup/vue-quill"
+      ]
+    },
+    "CroppingModal": {
+      "npm": [
+        "vue-advanced-cropper"
+      ],
+      "composables": [
+        "use-modal"
+      ]
+    }
+  }
+}

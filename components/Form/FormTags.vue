@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ErrorMessage, useField } from 'vee-validate';
+import {ErrorMessage, useField} from 'vee-validate';
 
 defineOptions({
   inheritAttrs: false,
@@ -24,7 +24,7 @@ const props = withDefaults(
     },
 );
 
-const { errors, handleBlur, meta, setTouched, setValue, value } = useField(() => props.name, undefined, {
+const {errors, handleBlur, meta, setTouched, setValue, value} = useField(() => props.name, undefined, {
   controlled: !props.standalone,
   initialValue: props.standalone ? props.modelValue : undefined,
   syncVModel: props.standalone,
@@ -75,7 +75,7 @@ function removeTag(tag: string) {
     </div>
     <div class="flex flex-wrap gap-3">
       <span v-for="(tag, index) of tags" :key="index" class="px-3.5 py-1 rounded-full bg-primary-200"
-      >{{ tag }} <Icon name="xmark" class="text-xs ms-2 cursor-pointer" @click="removeTag(tag)" />
+      >{{ tag }} <span class="i-bi-x text-xs ms-2 cursor-pointer" @click="removeTag(tag)"/>
       </span>
     </div>
     <div class="relative mt-2 pb-3 text-left">
@@ -99,9 +99,9 @@ function removeTag(tag: string) {
           class="absolute top-0 h-9 right-2 flex items-center justify-center text-2xl"
           @click="addTag()"
       >
-        <Icon name="plus" class="text-xl" />
+        <span class="i-bi-plus text-xl"></span>
       </button>
-      <ErrorMessage v-if="meta.validated" class="absolute -bottom-2.5 text-xs font-light text-red-600" :name="name" />
+      <ErrorMessage v-if="meta.validated" class="absolute -bottom-2.5 text-xs font-light text-red-600" :name="name"/>
     </div>
   </div>
 </template>

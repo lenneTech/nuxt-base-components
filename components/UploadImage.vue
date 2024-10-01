@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ErrorMessage, useField } from 'vee-validate';
 
-import ModalCroppingImage from '~/components/Modal/ModalCroppingImage.vue';
+import ModalCroppingImage from '~/components/CroppingModal.vue';
 
 const props = withDefaults(
   defineProps<{

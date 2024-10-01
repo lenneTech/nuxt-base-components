@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { Cropper } from 'vue-advanced-cropper';
 
-import type { ModalContext } from '~/composables/use-modal';
+import {type ModalContext, useModal} from '~/composables/use-modal';
 
 const props = defineProps<{
   context: ModalContext<{ aspectRatio: number; confirm: (file: File | null) => void; img: File }>;
 }>();
+
 const { close } = useModal();
 const base64File = ref<string>('');
 const cropperRef = ref();
@@ -56,7 +57,7 @@ function submit() {
   >
     <div class="flex flex-col gap-4 items-center justify-center mb-2">
       <div class="size-11 bg-primary rounded-full flex justify-center items-center">
-        <Icon name="crop-simple" class="text-xl text-white" />
+        <span class="i-bi-crop text-xl text-white" />
       </div>
       <h6>Bildausschnitt festlegen</h6>
       <button class="absolute top-5 right-5" @click="close()">
