@@ -7,21 +7,42 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "storybook": "storybook dev --port 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@egoist/tailwindcss-icons": "1.7.1",
-    "@iconify-json/bi": "1.1.22",
-    "@vueup/vue-quill": "^1.2.0",
-    "@vueuse/core": "10.7.2",
-    "nuxt": "3.10.2",
-    "tailwind-merge": "2.2.1",
-    "vee-validate": "^4.12.6",
-    "vue": "3.4.19",
-    "vue-advanced-cropper": "^2.8.8",
-    "vue-router": "4.2.5"
+    "@egoist/tailwindcss-icons": "1.8.1",
+    "@iconify-json/bi": "1.2.0",
+    "@nuxtjs/storybook": "8.2.0",
+    "@vueup/vue-quill": "1.2.0",
+    "@vueuse/core": "11.1.0",
+    "nuxt": "3.13.2",
+    "tailwind-merge": "2.5.2",
+    "vee-validate": "4.13.2",
+    "vue": "3.5.10",
+    "vue-advanced-cropper": "2.8.9",
+    "vue-router": "4.4.5"
   },
   "devDependencies": {
-    "@nuxtjs/tailwindcss": "6.11.4"
+    "@nuxtjs/storybook": "8.2.0",
+    "@nuxtjs/tailwindcss": "6.12.1",
+    "@storybook-vue/nuxt": "8.2.0",
+    "@storybook/addon-a11y": "^8.3.4",
+    "@storybook/addon-designs": "^8.0.3",
+    "@storybook/addon-essentials": "8.3.4",
+    "@storybook/addon-interactions": "8.3.4",
+    "@storybook/addon-links": "8.3.4",
+    "@storybook/addon-options": "5.3.21",
+    "@storybook/blocks": "8.3.4",
+    "@storybook/builder-vite": "8.3.4",
+    "@storybook/manager-api": "^8.3.4",
+    "@storybook/test": "8.3.4",
+    "@storybook/theming": "^8.3.4",
+    "@storybook/vue3": "8.3.4",
+    "@storybook/vue3-vite": "8.3.4",
+    "@types/node": "22.7.4",
+    "storybook": "8.3.4",
+    "storybook-dark-mode": "4.0.2"
   }
 }
