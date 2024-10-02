@@ -53,7 +53,7 @@ const attributes = useAttrs() as { class: string };
 <template>
   <div class="mt-4">
     <div v-if="label" class="flex gap-5">
-      <label :for="name" class="block text-base font-medium leading-6 text-foreground" :class="attributes.class"
+      <label :for="name" class="block text-base font-medium leading-3 text-foreground" :class="attributes.class"
       >{{ label }}{{ meta.required ? '*' : '' }}</label
       >
       <slot name="suffix"></slot>
@@ -68,7 +68,7 @@ const attributes = useAttrs() as { class: string };
           :readonly="readOnly"
           :tabindex="tabindex"
           :disabled="disabled"
-          class="bg-background block w-full rounded-md border-0 py-1.5 text-foreground shadow-sm ring-1 ring-inset ring-border placeholder:text-foreground/50 focus:ring-1 focus:ring-inset focus:ring-primary-500 sm:text-sm sm:leading-6 read-only:bg-white-100 read-only:ring-white-100 read-only:focus:ring-white-100"
+          class="bg-background block w-full rounded-md border-0 p-1.5 text-foreground shadow-sm ring-1 ring-inset ring-border placeholder:text-foreground/50 focus:ring-1 focus:ring-inset focus:ring-primary-500 sm:text-sm sm:leading-6 read-only:bg-white-100 read-only:ring-white-100 read-only:focus:ring-white-100 disabled:opacity-60"
           :class="{ '!ring-error !text-error': meta.validated && errors?.length }"
           :placeholder="placeholder"
           @blur="handleBlur"
