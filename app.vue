@@ -1,14 +1,14 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 const isExpanded = ref(false)
 </script>
 
 <template>
   <div>
     <p class="text-red-500">Test</p>
-    <Button size="md" color="primary" appearance="regular">
+    <Button appearance="regular" color="primary" size="md">
       Regular
     </Button>
-    <Accordion class="text-left" :expanded="isExpanded" @click="isExpanded = !isExpanded">
+    <Accordion :expanded="isExpanded" class="text-left" @click="isExpanded = !isExpanded">
       <template #title>
         <p class="font-semibold"> Example</p>
       </template>
