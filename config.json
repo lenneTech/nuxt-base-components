@@ -6,16 +6,15 @@
         "@tanstack/vue-table",
         "tailwind-variants"
       ],
-      "composables": [
-        "FormCheckbox",
-        "FormToggle"
+      "components": [
+        "Form"
       ]
     },
     "TableDraggable": {
       "npm": [
         "vuedraggable@4"
       ],
-      "composables": [
+      "components": [
         "Table"
       ]
     },
