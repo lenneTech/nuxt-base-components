@@ -1,6 +1,6 @@
 {
   "config": {
-    "Table/Table": {
+    "Table": {
       "npm": [
         "@vueuse/core",
         "@tanstack/vue-table",
