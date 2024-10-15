@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import {ErrorMessage, useField} from 'vee-validate';
-import TransitionFade from "~/dev-components/Transition/TransitionFade.vue";
 
 defineOptions({
   inheritAttrs: false,

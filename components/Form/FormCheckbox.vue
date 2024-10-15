@@ -17,6 +17,7 @@ const props = withDefaults(
     standalone?: boolean;
     suffixIcon?: string;
     tabindex?: string;
+    ariaLabel?: string;
   }>(),
   {
     readOnly: false,
@@ -30,6 +31,10 @@ const { errors, handleBlur, meta, setTouched, setValue, value } = useField(() =>
   syncVModel: props.standalone,
 });
 
+watch(value, () => {
+  indeterminate.value = value.value === 'indeterminate';
+});
+
 function handleInput(e: any) {
   setValue(e.target.checked, meta.validated);
 }
@@ -41,20 +46,22 @@ const attributes = useAttrs() as { class: string };
   <div class="mt-4">
     <div class="relative flex gap-x-2 mt-2 pb-3 text-left">
       <input
-        :id="name"
-        :checked="value"
-        :autocomplete="autocomplete"
-        type="checkbox"
-        :name="name"
-        :readonly="readOnly"
-        :tabindex="tabindex"
-        :disabled="disabled"
-        class="rounded border py-1.5 cursor-pointer"
-        :class="{ '!ring-error !text-error': meta.validated && errors?.length }"
-        :placeholder="placeholder"
-        @blur="handleBlur"
-        @focus="setTouched(true)"
-        @input="handleInput"
+          :id="name"
+          :checked="value"
+          :autocomplete="autocomplete"
+          :indeterminate="indeterminate"
+          type="checkbox"
+          :name="name"
+          :readonly="readOnly"
+          :tabindex="tabindex"
+          :aria-label="ariaLabel"
+          :disabled="disabled"
+          class="rounded border py-1.5 cursor-pointer"
+          :class="{ '!ring-error !text-error': meta.validated && errors?.length }"
+          :placeholder="placeholder"
+          @blur="handleBlur"
+          @focus="setTouched(true)"
+          @input="handleInput"
       />
       <label
         :for="name"

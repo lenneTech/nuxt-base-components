@@ -1,5 +1,24 @@
 {
   "config": {
+    "Table": {
+      "npm": [
+        "@vueuse/core",
+        "@tanstack/vue-table",
+        "tailwind-variants"
+      ],
+      "composables": [
+        "FormCheckbox",
+        "FormToggle"
+      ]
+    },
+    "TableDraggable": {
+      "npm": [
+        "vuedraggable@4"
+      ],
+      "composables": [
+        "Table"
+      ]
+    },
     "Accordion": {
       "npm": [
         "@vueuse/core"

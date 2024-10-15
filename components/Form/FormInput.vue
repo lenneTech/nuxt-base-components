@@ -10,12 +10,16 @@ const props = withDefaults(
       autocomplete?: string;
       disabled?: boolean;
       keySubmit?: boolean;
+      iconSubmit?: boolean;
       label?: string;
+      wrapperClass?: string;
+      containerClass?: string;
       modelValue?: any;
       name: string;
       placeholder?: string;
       readOnly?: boolean;
       standalone?: boolean;
+      suffixIcon?: string;
       tabindex?: string;
       type?: string;
     }>(),
@@ -51,14 +55,14 @@ const attributes = useAttrs() as { class: string };
 
 
 <template>
-  <div class="mt-4">
+  <div :class="['mt-4', wrapperClass]">
     <div v-if="label" class="flex gap-5">
       <label :for="name" class="block text-base font-medium leading-3 text-foreground" :class="attributes.class"
       >{{ label }}{{ meta.required ? '*' : '' }}</label
       >
       <slot name="suffix"></slot>
     </div>
-    <div class="relative mt-2 pb-3 text-left">
+    <div :class="['relative mt-2 pb-3 text-left', containerClass]">
       <input
           :id="name"
           :value="value"
@@ -76,6 +80,12 @@ const attributes = useAttrs() as { class: string };
           @input="handleInput"
           @keydown.enter="keySubmit ? onSubmit(value) : null"
       />
+      <span
+          v-if="suffixIcon"
+          class="absolute top-2.5 right-2.5 size-4"
+          :class="[iconSubmit ? 'cursor-pointer' : '', suffixIcon]"
+          @click="iconSubmit ? onSubmit(value) : null"
+      ></span>
       <ErrorMessage v-if="meta.validated" class="absolute -bottom-2.5 text-xs font-light text-red-600" :name="name" />
     </div>
   </div>

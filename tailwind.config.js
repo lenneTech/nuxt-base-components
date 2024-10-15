@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const { iconsPlugin, getIconCollections } = require('@egoist/tailwindcss-icons');
+
 module.exports = {
   theme: {
     extend: {
