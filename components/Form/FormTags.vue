@@ -152,9 +152,10 @@ function customBlurHandle() {
             ref="inputRef"
             v-model="inputValue"
             :class="inputFocus ? 'rounded-b-none': ''"
+            :disabled="disabled"
             :name="name"
             :placeholder="placeholder"
-
+            :readonly="readOnly"
             autocomplete="off"
             class="bg-background px-3 block w-full rounded-md border-0 py-1.5 text-foreground shadow-sm ring-1 ring-inset ring-border placeholder:text-foreground/50 focus:ring-1 focus:ring-inset focus:ring-primary-500 sm:text-sm sm:leading-6"
             type="text"

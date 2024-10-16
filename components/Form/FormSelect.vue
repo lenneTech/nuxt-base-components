@@ -109,6 +109,7 @@ function setFocus() {
               ref="inputRef"
               v-model="inputValue"
               :class="[inputFocus ? 'rounded-b-none': '', searchable ? '':'cursor-pointer']"
+              :disabled="disabled"
               :name="name"
               :placeholder="placeholder"
               :readonly="!searchable"
