@@ -142,8 +142,8 @@ function customBlurHandle() {
       <span
           v-for="(tag, index) of tags"
           :key="index"
-          class="px-3.5 py-1 rounded-full bg-primary-200 flex items-center"
-      >{{ tag }} <span class="text-lg ms-2 cursor-pointer i-bi-x" @click="removeTag(tag)"></span>
+          class="px-3 bg-white py-1 text-sm rounded-full border border-primary-200 flex items-center"
+      >{{ tag }} <span class="text-lg text-gray-500 ms-2 cursor-pointer i-bi-x" @click="removeTag(tag)"></span>
       </span>
     </div>
     <div class="relative my-2 text-left">
@@ -159,7 +159,7 @@ function customBlurHandle() {
             :name="name"
             :placeholder="placeholder"
             autocomplete="off"
-            class="bg-background px-3 block w-full rounded-md border-0 py-1.5 text-foreground shadow-sm ring-1 ring-inset ring-border placeholder:text-foreground/50 focus:ring-1 focus:ring-inset focus:ring-primary-500 sm:text-sm sm:leading-6"
+            class="bg-background px-3 block w-full rounded-md border-0 p-2.5 text-foreground shadow-sm ring-1 ring-inset ring-border placeholder:text-foreground/50 focus:ring-1 focus:ring-inset focus:ring-primary-500 sm:text-sm sm:leading-6"
             type="text"
             @blur="customBlurHandle()"
             @focus="setFocus"
@@ -177,17 +177,20 @@ function customBlurHandle() {
         <div
             v-show="inputFocus && defaultOptions.length"
             :class="`bg-white ring-primary-400 rounded-b-md overflow-hidden${
-            inputFocus && defaultOptions.length ? ' ring-2' : ''
+            inputFocus && defaultOptions.length ? ' ring-1 ring-inset' : ''
           }`"
             :style="`top: ${inputRef ? inputRef.clientHeight : 0}px; max-height: 250px;`"
-            class="absolute right-0 left-0 z-50 overflow-x-hidden overflow-y-auto flex flex-col justify-start items-start"
+            class="absolute right-0 left-0 -top-5 z-50 overflow-x-hidden overflow-y-auto flex flex-col justify-start items-start"
         >
           <div v-if="selectOptions.length" class="w-full">
             <button
                 v-for="option of selectOptions"
                 :key="option"
-                :class="{ '!text-primary': inputValue === option }"
-                class="text-base font-normal py-2 px-3 hover:bg-primary-100 text-primary w-full text-start disabled:text-gray-400"
+                :class="[
+                { '!text-primary': inputValue === option },
+                { 'rounded-b-md': selectOptions.indexOf(option) === selectOptions.length - 1 },
+              ]"
+                class="text-base font-normal py-2 px-3 hover:bg-primary-100 w-full text-start disabled:text-gray-400 ring-primary-400 hover:ring-1 hover:ring-inset"
                 type="button"
                 @click="handleSelect(option)"
             >
@@ -196,7 +199,7 @@ function customBlurHandle() {
           </div>
           <div v-else-if="inputValue && !selectOptions.length" class="w-full">
             <button
-                class="text-base font-normal py-2 px-3 hover:bg-primary-100 text-primary w-full text-start disabled:text-gray-400"
+                class="text-base font-normal py-2 px-3 hover:bg-primary-100 w-full text-start disabled:text-gray-400"
                 @click="addTag()"
             >
               {{ useCustomTags ? `Eintrag ${inputValue} nicht gefunden. Erstellen?` : 'Keine Einträge gefunden' }}

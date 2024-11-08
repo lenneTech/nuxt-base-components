@@ -159,7 +159,7 @@ function setFocus() {
             </div>
             <div v-else class="w-full">
               <button
-                  class="text-base font-normal py-2 px-3 hover:bg-primary-100 text-primary w-full text-start disabled:text-gray-400"
+                  class="text-base font-normal py-2 px-3 hover:bg-primary-100 w-full text-start disabled:text-gray-400"
               >
                 Keine Einträge gefunden
               </button>
