@@ -8,25 +8,25 @@ defineOptions({
 const props = withDefaults(
     defineProps<{
       disabled?: boolean;
+      helperText?: string;
       label?: string;
       modelValue?: any;
       name: string;
+      options?: string[];
       placeholder?: string;
+      position: 'bottom' | 'top';
       readOnly?: boolean;
       standalone?: boolean;
       tabindex?: string;
+      useCustomTags?: boolean;
       validateOnInput?: boolean;
-      options?: string[];
-      position: 'top' | 'bottom'
-      helperText?: string;
-      useCustomTags?: boolean,
     }>(),
     {
-      readOnly: false,
-      useCustomTags: true,
-      standalone: false,
-      validateOnInput: false,
       position: 'top',
+      readOnly: false,
+      standalone: false,
+      useCustomTags: true,
+      validateOnInput: false,
     },
 );
 
@@ -49,7 +49,6 @@ if (props?.options) {
   defaultOptions = [...props.options];
   selectOptions = ref<string[]>([...props.options]);
 }
-
 
 watch(value, () => {
   tags.value = value.value?.length ? (value.value as string[]) : [];
@@ -117,13 +116,13 @@ function setFocus() {
 }
 
 function customBlurHandle() {
-  handleBlur()
+  handleBlur();
   inputFocus.value = false;
 
   // Remove input value after timeout to use it as value on click on create custom tag
   setTimeout(() => {
-    inputValue.value = ''
-  }, 200)
+    inputValue.value = '';
+  }, 200);
 }
 </script>
 
@@ -140,10 +139,12 @@ function customBlurHandle() {
       <slot name="suffix"></slot>
     </div>
     <div v-if="position === 'top'" class="flex flex-wrap gap-3">
-        <span v-for="(tag, index) of tags" :key="index"
-              class="px-3.5 py-1 rounded-full bg-primary-200 flex items-center"
-        >{{ tag }} <span class="text-lg ms-2 cursor-pointer i-bi-x" @click="removeTag(tag)"></span>
-        </span>
+      <span
+          v-for="(tag, index) of tags"
+          :key="index"
+          class="px-3.5 py-1 rounded-full bg-primary-200 flex items-center"
+      >{{ tag }} <span class="text-lg ms-2 cursor-pointer i-bi-x" @click="removeTag(tag)"></span>
+      </span>
     </div>
     <div class="relative my-2 text-left">
       <div class="relative w-full flex items-center" @click="inputRef?.focus()">
@@ -151,47 +152,55 @@ function customBlurHandle() {
             :id="name"
             ref="inputRef"
             v-model="inputValue"
-            :class="inputFocus ? 'rounded-b-none': ''"
-            :disabled="disabled"
+            :class="[
+            inputFocus && defaultOptions?.length ? 'rounded-b-none' : '',
+            { '!ring-red-500 !text-red-500': meta.validated && errors?.length },
+          ]"
             :name="name"
             :placeholder="placeholder"
-            :readonly="readOnly"
             autocomplete="off"
             class="bg-background px-3 block w-full rounded-md border-0 py-1.5 text-foreground shadow-sm ring-1 ring-inset ring-border placeholder:text-foreground/50 focus:ring-1 focus:ring-inset focus:ring-primary-500 sm:text-sm sm:leading-6"
             type="text"
-            @blur="customBlurHandle();"
+            @blur="customBlurHandle()"
             @focus="setFocus"
             @input="handleInput"
             @keydown.enter.prevent="addTag()"
         />
         <span v-if="options" class="i-bi-chevron-down absolute right-1"></span>
-        <span v-if="!options && useCustomTags" class="text-xl i-bi-plus absolute right-1 cursor-pointer"
-              @click="addTag()"></span>
+        <span
+            v-if="!options && useCustomTags"
+            class="text-xl i-bi-plus absolute right-1 cursor-pointer"
+            @click="addTag()"
+        ></span>
       </div>
       <TransitionFade v-if="options" :leave-duration="200" :start-duration="200">
         <div
             v-show="inputFocus && defaultOptions.length"
-            :class="'bg-white ring-primary-400 rounded-b-md overflow-hidden' + (inputFocus && defaultOptions.length ? ' ring-2' : '')"
+            :class="`bg-white ring-primary-400 rounded-b-md overflow-hidden${
+            inputFocus && defaultOptions.length ? ' ring-2' : ''
+          }`"
             :style="`top: ${inputRef ? inputRef.clientHeight : 0}px; max-height: 250px;`"
             class="absolute right-0 left-0 z-50 overflow-x-hidden overflow-y-auto flex flex-col justify-start items-start"
         >
           <div v-if="selectOptions.length" class="w-full">
-            <button v-for="option of selectOptions" :key="option"
-                    :class="{ '!text-primary': inputValue === option }"
-                    class="text-base font-normal py-2 px-3 hover:bg-primary-100 text-primary w-full text-start disabled:text-gray-400"
-                    type="button" @click="handleSelect(option)">
+            <button
+                v-for="option of selectOptions"
+                :key="option"
+                :class="{ '!text-primary': inputValue === option }"
+                class="text-base font-normal py-2 px-3 hover:bg-primary-100 text-primary w-full text-start disabled:text-gray-400"
+                type="button"
+                @click="handleSelect(option)"
+            >
               {{ option }}
             </button>
           </div>
-          <div
-              v-else-if="inputValue && !selectOptions.length"
-              class="w-full">
+          <div v-else-if="inputValue && !selectOptions.length" class="w-full">
             <button
                 class="text-base font-normal py-2 px-3 hover:bg-primary-100 text-primary w-full text-start disabled:text-gray-400"
-                @click="addTag()">
+                @click="addTag()"
+            >
               {{ useCustomTags ? `Eintrag ${inputValue} nicht gefunden. Erstellen?` : 'Keine Einträge gefunden' }}
             </button>
-
           </div>
         </div>
       </TransitionFade>
@@ -199,10 +208,9 @@ function customBlurHandle() {
       <ErrorMessage v-if="meta.validated" :name="name" class="absolute -bottom-2.5 text-xs font-light text-red-600"/>
     </div>
     <div v-if="position === 'bottom'" class="flex flex-wrap gap-3">
-        <span v-for="(tag, index) of tags" :key="index"
-              class="px-3.5 py-1 rounded-full bg-primary-200 flex items-center"
-        >{{ tag }} <span class="text-lg ms-2 cursor-pointer i-bi-x" @click="removeTag(tag)"></span>
-        </span>
+      <span v-for="(tag, index) of tags" :key="index" class="px-3.5 py-1 rounded-full bg-primary-200 flex items-center"
+      >{{ tag }} <span class="text-lg ms-2 cursor-pointer i-bi-x" @click="removeTag(tag)"></span>
+      </span>
     </div>
   </div>
 </template>

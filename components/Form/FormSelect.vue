@@ -13,7 +13,9 @@ defineOptions({
 const props = withDefaults(
     defineProps<{
       arrayMode?: boolean;
+      defaultLabel?: string;
       disabled?: boolean;
+      helperText?: string;
       label?: string;
       modelValue?: string;
       multiple?: boolean;
@@ -21,17 +23,15 @@ const props = withDefaults(
       options: SelectOption[];
       placeholder?: string;
       readOnly?: boolean;
+      searchable?: boolean;
       standalone?: boolean;
       tabindex?: string;
-      searchable?: boolean;
-      defaultLabel?: string;
-      helperText?: string;
     }>(),
     {
-      readOnly: false,
       defaultLabel: 'Keine Auswahl',
-      standalone: false,
+      readOnly: false,
       searchable: false,
+      standalone: false,
     },
 );
 
@@ -41,7 +41,6 @@ const inputValue = ref<string>();
 
 const defaultOptions: SelectOption[] = [...props?.options] || [];
 const selectOptions = ref<SelectOption[]>([...props?.options]);
-
 
 const attributes = useAttrs() as { class: string };
 
@@ -54,16 +53,22 @@ const {errors, handleBlur, meta, setTouched, setValue, value} = useField(() => p
 if (!meta.required) {
   defaultOptions.unshift({
     label: props.defaultLabel,
-    value: null
-  })
+    value: null,
+  });
   selectOptions.value.unshift({
     label: props.defaultLabel,
-    value: null
-  })
+    value: null,
+  });
 }
-
-inputValue.value = props.modelValue;
-
+watch(
+    () => value.value,
+    () => {
+      inputValue.value = props.standalone
+          ? props.modelValue
+          : selectOptions.value.find((option) => option.value === value.value)?.label;
+    },
+    {immediate: true},
+);
 
 function handleSelect(option: any) {
   if (option.value) {
@@ -74,7 +79,6 @@ function handleSelect(option: any) {
     inputValue.value = '';
   }
   setTouched(true);
-
 }
 
 function handleInput(event: any) {
@@ -108,15 +112,22 @@ function setFocus() {
               :id="name"
               ref="inputRef"
               v-model="inputValue"
-              :class="[inputFocus ? 'rounded-b-none': '', searchable ? '':'cursor-pointer']"
-              :disabled="disabled"
+              :class="[
+              inputFocus ? 'rounded-b-none' : '',
+              searchable ? '' : 'cursor-pointer',
+              { '!ring-red-500 !text-red-500': meta.validated && errors?.length },
+            ]"
               :name="name"
               :placeholder="placeholder"
               :readonly="!searchable"
               autocomplete="off"
               class="bg-background px-3 block w-full rounded-md border-0 py-1.5 text-foreground shadow-sm ring-1 ring-inset ring-border placeholder:text-foreground/50 focus:ring-1 focus:ring-inset focus:ring-primary-500 sm:text-sm sm:leading-6 read-only:bg-white-100 read-only:ring-white-100 read-only:focus:ring-white-100"
               type="text"
-              @blur="handleBlur(); inputFocus = false; inputValue = '';"
+              @blur="
+              handleBlur();
+              inputFocus = false;
+              inputValue = '';
+            "
               @focus="setFocus"
               @input="handleInput"
           />
@@ -125,29 +136,33 @@ function setFocus() {
         <TransitionFade :leave-duration="200" :start-duration="200">
           <div
               v-show="inputFocus && defaultOptions.length"
-              :class="'bg-white ring-primary-400 rounded-b-md overflow-hidden' + (inputFocus && defaultOptions.length ? ' ring-2' : '')"
+              :class="`bg-white ring-primary-400 rounded-b-md overflow-hidden${
+              inputFocus && defaultOptions.length ? ' ring-1 ring-inset' : ''
+            }`"
               :style="`top: ${inputRef ? inputRef.clientHeight : 0}px; max-height: 250px;`"
               class="absolute right-0 left-0 -top-5 z-50 overflow-x-hidden overflow-y-auto flex flex-col justify-start items-start"
           >
             <div v-if="selectOptions.length" class="w-full">
               <button
-                  v-for="option of selectOptions" :key="option.value!"
-                  :class="{ '!text-primary': inputValue === option.label }"
-                  class="text-base font-normal py-2 px-3 hover:bg-primary-100 text-primary w-full text-start disabled:text-gray-400"
+                  v-for="option of selectOptions"
+                  :key="option.value!"
+                  :class="[
+                  { '!text-primary': inputValue === option.label },
+                  { 'rounded-b-md': selectOptions.indexOf(option) === selectOptions.length - 1 },
+                ]"
+                  class="text-base font-normal py-2 px-3 hover:bg-primary-100 w-full text-start disabled:text-gray-400 ring-primary-400 hover:ring-1 hover:ring-inset"
                   type="button"
                   @click="handleSelect(option)"
               >
                 {{ option.label }}
               </button>
             </div>
-            <div
-                v-else
-                class="w-full">
+            <div v-else class="w-full">
               <button
-                  class="text-base font-normal py-2 px-3 hover:bg-primary-100 text-primary w-full text-start disabled:text-gray-400">
+                  class="text-base font-normal py-2 px-3 hover:bg-primary-100 text-primary w-full text-start disabled:text-gray-400"
+              >
                 Keine Einträge gefunden
               </button>
-
             </div>
           </div>
         </TransitionFade>

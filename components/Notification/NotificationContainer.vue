@@ -1,18 +1,21 @@
-<script setup lang="ts">
-const { notifications, remove } = useNotification();
+<script lang="ts" setup>
+const {notifications, remove} = useNotification();
 </script>
 
 <template>
-  <div aria-live="assertive" class="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6 z-[99999]">
-    <TransitionGroup tag="div" name="list" class="flex w-full flex-col items-center space-y-4 sm:items-end">
+  <div
+      aria-live="assertive"
+      class="pointer-events-none fixed inset-0 flex items-end px-4 py-6 sm:items-start sm:p-6 z-[99999]"
+  >
+    <TransitionGroup class="flex w-full flex-col items-center space-y-4 sm:items-end" name="list" tag="div">
       <Notification
-        v-for="notification in notifications"
-        :key="notification.uuid"
-        :text="notification.text"
-        :title="notification.title"
-        :type="notification.type"
-        :duration="notification.duration!"
-        @close="remove(notification.uuid)"
+          v-for="notification in notifications"
+          :key="notification.uuid"
+          :duration="notification.duration!"
+          :text="notification.text"
+          :title="notification.title"
+          :type="notification.type"
+          @close="remove(notification.uuid)"
       />
     </TransitionGroup>
   </div>
