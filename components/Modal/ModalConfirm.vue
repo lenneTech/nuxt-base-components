@@ -1,20 +1,26 @@
-<script setup lang="ts">
-import type { ModalContext } from '~/composables/use-modal';
+<script lang="ts" setup>
+import type {ModalContext} from '~/composables/use-modal';
 
 const props = defineProps<{
   context: ModalContext<{
     cancelText: string;
-    confirmColor?: 'primary' | 'secondary' | 'green' | 'yellow' | 'lightprimary' | 'danger';
+    confirmColor?: 'danger' | 'green' | 'lightprimary' | 'primary' | 'secondary' | 'yellow';
     confirmText: string;
     text: string;
     title: string;
   }>;
 }>();
-const { close } = useModal();
+const {close} = useModal();
 </script>
 
 <template>
-  <Modal class="p-10 relative" :show="context.show" :show-inner="context.showInner" :size="context.size" @cancel="context.closable ? close() : null">
+  <Modal
+      :show="context.show"
+      :show-inner="context.showInner"
+      :size="context.size"
+      class="p-10 relative"
+      @cancel="context.closable ? close() : null"
+  >
     <div class="flex items-center justify-center mb-2">
       <div class="font-semibold text-xl text-foreground">
         {{ context?.data?.title }}
@@ -27,7 +33,7 @@ const { close } = useModal();
       {{ context?.data?.text }}
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-      <Button appearance="outline" color="primary" @click="context?.confirm?.(false)">
+      <Button appearance="outline" @click="context?.confirm?.(false)">
         {{ context?.data?.cancelText || 'Abbrechen' }}
       </Button>
       <Button :color="context?.data?.confirmColor || 'primary'" @click="context?.confirm?.(true)">

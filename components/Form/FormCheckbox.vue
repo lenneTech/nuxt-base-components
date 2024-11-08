@@ -1,35 +1,38 @@
-<script setup lang="ts">
-import { ErrorMessage, useField } from 'vee-validate';
+<script lang="ts" setup>
+import {ErrorMessage, useField} from 'vee-validate';
 
 defineOptions({
   inheritAttrs: false,
 });
 
 const props = withDefaults(
-  defineProps<{
-    autocomplete?: string;
-    disabled?: boolean;
-    label?: string;
-    modelValue?: any;
-    name: string;
-    placeholder?: string;
-    readOnly?: boolean;
-    standalone?: boolean;
-    suffixIcon?: string;
-    tabindex?: string;
-    ariaLabel?: string;
-  }>(),
-  {
-    readOnly: false,
-    standalone: false,
-  },
+    defineProps<{
+      ariaLabel?: string;
+      autocomplete?: string;
+      disabled?: boolean;
+      label?: string;
+      modelValue?: any;
+      name: string;
+      placeholder?: string;
+      readOnly?: boolean;
+      standalone?: boolean;
+      suffixIcon?: string;
+      tabindex?: string;
+      wrapperClass?: string;
+    }>(),
+    {
+      readOnly: false,
+      standalone: false,
+    },
 );
 
-const { errors, handleBlur, meta, setTouched, setValue, value } = useField(() => props.name, undefined, {
+const {errors, handleBlur, meta, setTouched, setValue, value} = useField(() => props.name, undefined, {
   controlled: !props.standalone,
   initialValue: props.modelValue,
   syncVModel: props.standalone,
 });
+
+const indeterminate = ref<boolean>(false);
 
 watch(value, () => {
   indeterminate.value = value.value === 'indeterminate';
@@ -43,33 +46,34 @@ const attributes = useAttrs() as { class: string };
 </script>
 
 <template>
-  <div class="mt-4">
+  <div :class="[wrapperClass]" class="mt-4">
     <div class="relative flex gap-x-2 mt-2 pb-3 text-left">
       <input
           :id="name"
-          :checked="value"
+          :aria-label="ariaLabel"
           :autocomplete="autocomplete"
+          :checked="value"
+          :class="{ '!ring-red-500 !text-red-500': meta.validated && errors?.length }"
+          :disabled="disabled"
           :indeterminate="indeterminate"
-          type="checkbox"
           :name="name"
+          :placeholder="placeholder"
           :readonly="readOnly"
           :tabindex="tabindex"
-          :aria-label="ariaLabel"
-          :disabled="disabled"
           class="rounded border py-1.5 cursor-pointer"
-          :class="{ '!ring-error !text-error': meta.validated && errors?.length }"
-          :placeholder="placeholder"
+          type="checkbox"
           @blur="handleBlur"
           @focus="setTouched(true)"
           @input="handleInput"
       />
       <label
-        :for="name"
-        class="text-base font-medium leading-6 text-foreground cursor-pointer"
-        :class="attributes.class"
-        >{{ label }}{{ meta.required ? '*' : '' }}</label
+          :class="attributes.class"
+          :for="name"
+          class="text-base font-medium leading-6 text-foreground cursor-pointer"
+      >{{ label }}{{ meta.required && label ? '*' : '' }}</label
       >
-      <ErrorMessage v-if="meta.validated" class="absolute -bottom-2.5 text-xs font-light text-red-600" :name="name" />
+      <slot name="suffix"></slot>
+      <ErrorMessage v-if="meta.validated" :name="name" class="absolute -bottom-2.5 text-xs font-light text-red-600"/>
     </div>
   </div>
 </template>
