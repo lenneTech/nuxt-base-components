@@ -198,6 +198,7 @@ onMounted(() => {
     <div>
       <div :class="styles({ class: props.class })">
         <TableRaw
+            class="text-black"
             :class="tableClass"
             :style="{
             width: table.getCenterTotalSize(),

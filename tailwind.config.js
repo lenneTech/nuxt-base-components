@@ -4,6 +4,14 @@ const { iconsPlugin, getIconCollections } = require('@egoist/tailwindcss-icons')
 module.exports = {
   theme: {
     extend: {
+      spacing: {
+        "input-radius": "var(--input-radius)",
+        "input-padding-x": "var(--input-padding-x)",
+        "input-padding-y": "var(--input-padding-y)",
+        "button-radius": "var(--button-radius)",
+        "button-padding-x": "var(--button-padding-x)",
+        "button-padding-y": "var(--button-padding-y)"
+      },
       colors: {
         background: '#FFFFFF',
         foreground: '#000000',

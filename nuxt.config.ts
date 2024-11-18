@@ -11,5 +11,5 @@ export default defineNuxtConfig({
   imports: {
     dirs: ['./dev-components'],
   },
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/storybook'],
+  modules: ['@nuxtjs/tailwindcss'],
 })

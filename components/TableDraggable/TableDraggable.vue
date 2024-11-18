@@ -34,7 +34,7 @@ const props = withDefaults(
       columns: () => [],
       data: () => [],
       descIcon: 'i-bi-chevron-down',
-      showSearch: true,
+      showSearch: false,
       sorting: () => [],
       unsortedIcon: 'i-bi-chevron-expand',
     },
@@ -182,7 +182,7 @@ onMounted(() => {
     </div>
     <div>
       <div :class="styles({ class: props.class })" class="mt-5">
-        <TableRaw :class="tableClass">
+        <TableRaw class="text-black" :class="tableClass">
           <TableHeader class="sticky top-0 bg-zinc-100 z-40">
             <TableRow
                 v-for="headerGroup in table.getHeaderGroups()"

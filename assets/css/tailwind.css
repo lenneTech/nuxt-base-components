@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    :root {
+        --input-radius: 10px;
+        --input-padding-x: 16px;
+        --input-padding-y: 8px;
+        --button-radius: 10px;
+        --button-padding-x: 24px;
+        --button-padding-y: 8px;
+    }
+}

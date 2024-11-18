@@ -8,8 +8,9 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "storybook": "storybook dev --port 6006",
-    "build-storybook": "storybook build"
+    "story:dev": "histoire dev",
+    "story:build": "histoire build",
+    "story:preview": "histoire preview"
   },
   "dependencies": {
     "@egoist/tailwindcss-icons": "1.8.1",
@@ -27,24 +28,10 @@
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
-    "@nuxtjs/storybook": "8.3.1",
+    "@histoire/plugin-nuxt": "^0.17.17",
+    "@histoire/plugin-vue": "^0.17.17",
     "@nuxtjs/tailwindcss": "6.12.1",
-    "@storybook-vue/nuxt": "8.3.1",
-    "@storybook/addon-a11y": "^8.3.5",
-    "@storybook/addon-designs": "^8.0.3",
-    "@storybook/addon-essentials": "8.3.5",
-    "@storybook/addon-interactions": "8.3.5",
-    "@storybook/addon-links": "8.3.5",
-    "@storybook/addon-options": "5.3.21",
-    "@storybook/blocks": "8.3.5",
-    "@storybook/builder-vite": "8.3.5",
-    "@storybook/manager-api": "^8.3.5",
-    "@storybook/test": "8.3.5",
-    "@storybook/theming": "^8.3.5",
-    "@storybook/vue3": "8.3.5",
-    "@storybook/vue3-vite": "8.3.5",
     "@types/node": "22.7.5",
-    "storybook": "8.3.5",
-    "storybook-dark-mode": "4.0.2"
+    "histoire": "^0.17.17"
   }
 }

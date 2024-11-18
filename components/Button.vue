@@ -30,15 +30,15 @@ const props = withDefaults(
 );
 
 const appearanceClasses: Record<typeof props.appearance, string> = {
-  regular: 'rounded-md text-white',
+  regular: 'rounded-[var(--button-radius)] text-white',
   outline:
-      'rounded-md border border-primary bg-background hover:bg-primary-500 text-primary hover:text-white disabled:bg-transparent disabled:text-gray-400 disabled:border-gray-200',
+      'rounded-[var(--button-radius)] border border-primary bg-background hover:bg-primary-500 text-primary hover:text-white disabled:bg-transparent disabled:text-gray-400 disabled:border-gray-200',
   none: 'bg-transparent border-transparent hover:text-primary-500 text-foreground hover:bg-transparent',
 };
 
 const sizeClasses: Record<typeof props.size, string> = {
   sm: 'min-w-[100px] py-1.5 px-1.5 text-sm',
-  md: 'min-w-[100px] py-1.5 px-2 text-base',
+  md: 'min-w-[100px] py-[var(--button-padding-y)] px-[var(--button-padding-x)] text-base',
   lg: 'min-w-[240px] py-3 px-4 text-lg',
   auto: 'text-sm lg:text-lg',
 };
