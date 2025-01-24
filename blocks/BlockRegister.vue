@@ -45,7 +45,7 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
     </div>
 
     <div class="mt-12 sm:mx-auto sm:w-full sm:max-w-[480px]">
-      <div class="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+      <div class="px-6 py-12 shadow sm:rounded-lg sm:px-12">
         <form novalidate @submit="onSubmit">
           <FormInput
               autocomplete="email"
@@ -97,7 +97,7 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
               <div class="w-full border-t border-gray-200"></div>
             </div>
             <div class="relative flex justify-center text-sm/6 font-medium">
-              <span class="bg-white px-6 text-gray-900">Oder weiter mit</span>
+              <span class="px-6 text-gray-900">Oder weiter mit</span>
             </div>
           </div>
 
