@@ -32,29 +32,27 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
 </script>
 
 <template>
-  <div class="flex min-h-full flex-1 flex-col justify-center">
+  <div class="flex min-h-dvh flex-1 flex-col justify-center">
     <div class="sm:mx-auto sm:w-full sm:max-w-md">
       <NuxtImg alt="Logo" class="mx-auto w-auto" src="https://placehold.co/100x20/png"/>
       <h2 class="mt-6 text-black text-2xl font-semibold text-center">Passwort zurücksetzen</h2>
     </div>
 
     <div class="mt-12 sm:mx-auto sm:w-full sm:max-w-[480px]">
-      <div class="shadow sm:rounded-lg">
-        <p>
-          Sollten Sie Ihr Passwort vergessen haben, können Sie es hier zurücksetzen. Sie erhalten eine E-Mail mit einem
-          Link, mit dessen Hilfe Sie ein neues Passwort vergeben können.
-        </p>
+      <p>
+        Sollten Sie Ihr Passwort vergessen haben, können Sie es hier zurücksetzen. Sie erhalten eine E-Mail mit einem
+        Link, mit dessen Hilfe Sie ein neues Passwort vergeben können.
+      </p>
 
-        <form novalidate @submit="onSubmit">
-          <FormInput autocomplete="email" label="E-Mail-Adresse" name="email" type="email"/>
-          <FormSubmit
-              :disabled="!meta.dirty"
-              :is-submitting="isSubmitting"
-              class="flex items-center justify-center mt-12"
-              label="E-Mail anfordern"
-          />
-        </form>
-      </div>
+      <form novalidate @submit="onSubmit">
+        <FormInput autocomplete="email" label="E-Mail-Adresse" name="email" type="email"/>
+        <FormSubmit
+            :disabled="!meta.dirty"
+            :is-submitting="isSubmitting"
+            class="flex items-center justify-center mt-12"
+            label="E-Mail anfordern"
+        />
+      </form>
     </div>
   </div>
 </template>
