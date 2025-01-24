@@ -39,7 +39,7 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
     </div>
 
     <div class="mt-12 sm:mx-auto sm:w-full sm:max-w-[480px]">
-      <div class="bg-white shadow sm:rounded-lg">
+      <div class="shadow sm:rounded-lg">
         <p>
           Sollten Sie Ihr Passwort vergessen haben, können Sie es hier zurücksetzen. Sie erhalten eine E-Mail mit einem
           Link, mit dessen Hilfe Sie ein neues Passwort vergeben können.

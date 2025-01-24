@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { ColumnDef } from "@tanstack/vue-table";
+import type {ColumnDef} from "@tanstack/vue-table";
 import Table from "../../../components/Table/Table.vue";
 
 type Payment = {
@@ -89,10 +89,10 @@ const data: Payment[] = [
   },
 ];
 const columns: ColumnDef<Payment>[] = [
-  { accessorKey: "id", header: "ID" },
-  { accessorKey: "amount", header: "Amount", enableHiding: true },
-  { accessorKey: "email", header: "Email", enableHiding: true },
-  { accessorKey: "status", header: "Status", enableHiding: true },
+  {accessorKey: "id", header: "ID"},
+  {accessorKey: "amount", header: "Amount", enableHiding: true},
+  {accessorKey: "email", header: "Email", enableHiding: true},
+  {accessorKey: "status", header: "Status", enableHiding: true},
   {
     accessorKey: "actions",
     header: "",
@@ -109,12 +109,14 @@ const columns: ColumnDef<Payment>[] = [
 </script>
 
 <template>
-  <Story title="Components/Table/Table">
+  <Story :layout="{ type: 'single', iframe: false }"
+         title="Components/Table/Table"
+  >
     <Variant title="Default">
-      <Table class="mt-5 max-h-[344px] menu-container" :data="data" :columns="columns"></Table>
+      <Table :columns="columns" :data="data" class="mt-5 max-h-[344px] menu-container"></Table>
     </Variant>
     <Variant title="With checkboxes">
-      <Table class="mt-5 max-h-[344px] menu-container" :data="data" :columns="columns" show-select></Table>
+      <Table :columns="columns" :data="data" class="mt-5 max-h-[344px] menu-container" show-select></Table>
     </Variant>
   </Story>
 </template>

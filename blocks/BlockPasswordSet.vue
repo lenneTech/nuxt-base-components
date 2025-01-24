@@ -44,7 +44,7 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
     </div>
 
     <div class="mt-12 sm:mx-auto sm:w-full sm:max-w-[480px]">
-      <div class="bg-white shadow sm:rounded-lg">
+      <div class="shadow sm:rounded-lg">
         <p>Das Passwort sollte eine Mindestlänge von 6 Zeichen haben.</p>
 
         <form novalidate @submit="onSubmit">
