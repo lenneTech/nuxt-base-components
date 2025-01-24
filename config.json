@@ -89,6 +89,48 @@
       "composables": [
         "use-modal"
       ]
+    },
+    "BlockLogin": {
+      "components": [
+        "FormInput",
+        "FormPassword",
+        "FormSubmit",
+        "IconGoogle",
+        "IconApple"
+      ],
+      "composables": [
+        "use-authentication"
+      ]
+    },
+    "BlockRegister": {
+      "components": [
+        "FormInput",
+        "FormPassword",
+        "FormSubmit",
+        "IconGoogle",
+        "IconApple"
+      ],
+      "composables": [
+        "use-authentication"
+      ]
+    },
+    "BlockPasswordReset": {
+      "components": [
+        "FormInput",
+        "FormSubmit"
+      ],
+      "composables": [
+        "use-authentication"
+      ]
+    },
+    "BlockPasswordSet": {
+      "components": [
+        "FormPassword",
+        "FormSubmit"
+      ],
+      "composables": [
+        "use-authentication"
+      ]
     }
   }
 }
