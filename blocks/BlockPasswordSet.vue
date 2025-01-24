@@ -66,5 +66,3 @@ const onSubmit = handleSubmit.withControlled(async (values) => {
     </div>
   </div>
 </template>
-
-<style scoped></style>
