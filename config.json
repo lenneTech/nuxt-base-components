@@ -92,38 +92,56 @@
     },
     "BlockLogin": {
       "components": [
-        "Form",
+        "Form/FormInput",
+        "Form/FormPassword",
+        "Form/FormSubmit",
         "IconGoogle",
         "IconApple"
       ],
       "composables": [
         "use-authentication"
+      ],
+      "npm": [
+        "vee-validate"
       ]
     },
     "BlockRegister": {
       "components": [
-        "Form",
+        "Form/FormInput",
+        "Form/FormPassword",
+        "Form/FormSubmit",
         "IconGoogle",
         "IconApple"
       ],
       "composables": [
         "use-authentication"
+      ],
+      "npm": [
+        "vee-validate"
       ]
     },
     "BlockPasswordReset": {
       "components": [
-        "Form"
+        "Form/FormInput",
+        "Form/FormSubmit"
       ],
       "composables": [
         "use-authentication"
+      ],
+      "npm": [
+        "vee-validate"
       ]
     },
     "BlockPasswordSet": {
       "components": [
-        "Form"
+        "Form/FormPassword",
+        "Form/FormSubmit"
       ],
       "composables": [
         "use-authentication"
+      ],
+      "npm": [
+        "vee-validate"
       ]
     }
   }
