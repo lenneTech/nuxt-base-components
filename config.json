@@ -95,8 +95,8 @@
         "Form/FormInput",
         "Form/FormPassword",
         "Form/FormSubmit",
-        "IconGoogle",
-        "IconApple"
+        "Icon/IconGoogle",
+        "Icon/IconApple"
       ],
       "composables": [
         "use-authentication"
@@ -110,8 +110,8 @@
         "Form/FormInput",
         "Form/FormPassword",
         "Form/FormSubmit",
-        "IconGoogle",
-        "IconApple"
+        "Icon/IconGoogle",
+        "Icon/IconApple"
       ],
       "composables": [
         "use-authentication"
