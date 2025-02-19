@@ -2,7 +2,7 @@
 import {toTypedSchema} from '@vee-validate/yup';
 import {useForm} from 'vee-validate';
 import {object, ref as yupRef, string} from 'yup';
-import {useAuthentication} from "../composables/use-authentication";
+import {useAuthentication} from '~/composables/use-authentication';
 
 const {checkToken, resetPassword} = useAuthentication();
 const route = useRoute();
