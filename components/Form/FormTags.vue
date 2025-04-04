@@ -20,9 +20,11 @@ const props = withDefaults(
       tabindex?: string;
       useCustomTags?: boolean;
       validateOnInput?: boolean;
+      splitBySpace?: boolean;
     }>(),
     {
       position: 'top',
+      splitBySpace: true,
       readOnly: false,
       standalone: false,
       useCustomTags: true,
@@ -60,7 +62,9 @@ function addTag() {
   }
 
   if (inputValue.value?.trim()) {
-    tags.value.push(...inputValue.value.trim().split(' '));
+    props.splitBySpace ?
+        tags.value.push(...inputValue.value.trim().split(' ')) :
+        tags.value.push(inputValue.value.trim());
   }
 
   setValue(tags.value, meta.validated);
